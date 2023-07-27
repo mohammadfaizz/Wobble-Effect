@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral&display=swap" rel="stylesheet">
@@ -10,7 +13,6 @@
     <title>Document</title>
     <style>
         
-
         .blast {
   display: inline-block;
 }
@@ -68,47 +70,55 @@
 }
 
 
-.animated {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
 body{
     /* background-color: #068fff; */
     /* background-color: #068fff; */
-    background-color: #0472cc;
+    /* background-color: #0472cc; */
+    /* background-color: #01565d; */
+    background-color: #e0edf5;
+    background-color: #0181b0;
+    /* background-color: #222222; */
     /* background-color: #ffb100; */
     text-align: center;
     font-family: 'Spectral', serif;
 }
 
-h1 {
+.big_text_shadow {
   color: white;
   text-shadow:
    5px 5px 0 #2B3467,  
-    3px 3px 0 #ffd700,
-    4px 4px 0 #ffd700,
-     2px 2px 0 #ffd700;
+    /* 3px 3px 0 #fff, */
+    /* 4px 4px 0 #fff, */
+     2px 2px 0 #2B3467;
 }
-
-/* .text_shadow{
-    transition: transform 1s ease-in-out;
-}
-
-.text_shadow:hover{
-    color: #0472cc !important;
-} */
 
     </style>
 </head>
-<body>
-<h1 class="blast" style="font-size: 124px; color: #fff;">Testing</h1>
+
+
+<body class="position-relative" style="width: 100vw; height: 100vh;">
+<!-- <h1 class="blast" style="font-size: 124px; color: #fff;">Testing</h1>
 <h1 style="font-size: 200px; margin: 0;"><span class="blast" style=" color: #ffd700;">T</span><span class="blast" style=" color: #FF52A2;">e</span><span class="blast" style=" color: #068FFF;">s</span><span class="blast" style=" color: #00DFA2;">ting</span></h1>
 <h1 style="font-size: 200px; margin: 0;"><span class="blast" style=" color: #ffd700;">T</span><span class="blast" style=" color: #ffd700;">e</span><span class="blast" style=" color: #ffd700;">s</span><span class="blast" style=" color: #ffd700;">t</span><span class="blast" style=" color: #ffd700;">i</span><span class="blast" style=" color: #ffd700;">n</span><span class="blast" style=" color: #ffd700;">g</span></h1>
-<h1 style="font-size: 90px; margin: 0;"><span class="blast" style=" color: #ffd700;">M</span><span class="blast" style=" color: #ffd700;">o</span><span class="blast" style=" color: #ffd700;">h</span><span class="blast" style=" color: #ffd700;">d</span> &nbsp;<span class="blast" style=" color: #ffd700;">F</span><span class="blast" style=" color: #ffd700;">a</span><span class="blast" style=" color: #ffd700;">i</span><span class="blast" style=" color: #ffd700;">z</span></h1>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<h1 style="font-size: 90px; margin: 0;"><span class="blast" style=" color: #ffd700;">M</span><span class="blast" style=" color: #ffd700;">o</span><span class="blast" style=" color: #ffd700;">h</span><span class="blast" style=" color: #ffd700;">d</span> &nbsp;<span class="blast" style=" color: #ffd700;">F</span><span class="blast" style=" color: #ffd700;">a</span><span class="blast" style=" color: #ffd700;">i</span><span class="blast" style=" color: #ffd700;">z</span></h1> -->
+
+<h1 class="text-white d-inline">Hey it's me,</h1>
+<h1 class="text-white fw-bold blast big_text_shadow" style="font-size:80px; color: #fff !important;">Teste</h1>
+
+
+<div class="position-absolute bg-white bottom-0 w-100" style="margin-bottom: 0px;">
+    <lord-icon src="https://cdn.lordicon.com/gmzxduhd.json"  class="me-3" trigger="hover" colors="primary:#01acdf,secondary:#e0edf5" stroke="100" style="width:50px;height:50px"></lord-icon>
+    <lord-icon src="https://cdn.lordicon.com/eszyyflr.json" class="me-3" trigger="hover" colors="primary:#01acdf,secondary:#e0edf5" stroke="100" style="width:50px;height:50px"></lord-icon>
+    <lord-icon src="https://cdn.lordicon.com/qhgmphtg.json" class="me-3" trigger="hover" colors="primary:#01acdf,secondary:#e0edf5" stroke="60" style="width:50px;height:50px"></lord-icon>
+    <!-- <lord-icon src="https://cdn.lordicon.com/sbiheqdr.json" trigger="hover" colors="primary:#01acdf,secondary:#e0edf5" stroke="80" style="width:50px;height:50px"></lord-icon> -->
+    <lord-icon src="https://cdn.lordicon.com/nocovwne.json" class="me-3" trigger="hover" colors="primary:#01acdf,secondary:#e0edf5" stroke="100" style="width:50px;height:50px"></lord-icon>
+    <lord-icon src="https://cdn.lordicon.com/zpxybbhl.json" trigger="hover" colors="primary:#01acdf,secondary:#e0edf5" stroke="100" style="width:50px;height:50px"></lord-icon>
+</div>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/all.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 <script>
     $(".blast").on("mouseenter",function(){
         $(this).addClass("animated rubberBand text_shadow");
@@ -119,7 +129,7 @@ h1 {
 
     $(".blast").on("mouseleave",function(){
         $(this).removeClass("text_shadow");
-    })
+    });
     
     </script>
 </body>
