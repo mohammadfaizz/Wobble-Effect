@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 300px;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, #2980b9, #6dd5fa, #f2f2f2);
+  font-family: 'Quicksand', sans-serif;
+}
+.header {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header img {
+  margin: 0;
+  border: 0;
+}
+.header h1 {
+  font-weight: 300;
+  font-size: 3rem;
+  color: white;
+  margin: 0;
+}
+canvas#snow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+    </style>
+</head>
+<body>
+
+
+    <div class="header">
+  <img src="data:image/png;base64,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" alt="APE Design">
+  <h1>Canvas Snow Animation</h1>
+</div>
+
+<canvas id="snow"></canvas>
+
+    
+    <script>
+        class SnowItem {
+  constructor(canvas, ctx, options) {
+    const { radius, speed, wind, color } = options
+    this.params = {
+      color,
+      x: _.random(0, canvas.offsetWidth),
+      y: _.random(-canvas.offsetHeight, 0),
+      radius: _.random(...radius),
+      speed: _.random(...speed),
+      wind: _.random(...wind),
+      isResized: false
+    }
+    this.canvas = canvas
+    this.ctx = ctx
+  }
+
+  updateData() {
+    this.params.x = _.random(0, this.canvas.offsetWidth)
+    this.params.y = _.random(-this.canvas.offsetHeight, 0)
+  }
+
+  translate() {
+    this.params.y += this.params.speed
+    this.params.x += this.params.wind
+  }
+
+  onDown() {
+    if (this.params.y < this.canvas.offsetHeight) return
+
+    if (this.params.isResized) {
+      this.updateData()
+      this.params.isResized = false
+    } else {
+      this.params.y = 0
+      this.params.x = _.random(0, this.canvas.offsetWidth)
+    }
+  }
+
+  resized() {
+    this.params.isResized = true
+  }
+
+  draw() {
+    this.ctx.beginPath()
+    this.ctx.arc(
+      this.params.x,
+      this.params.y,
+      this.params.radius,
+      0,
+      2 * Math.PI
+    )
+    this.ctx.fillStyle = this.params.color
+    this.ctx.fill()
+    this.ctx.closePath()
+  }
+
+  update() {
+    this.translate()
+    this.onDown()
+  }
+}
+
+class Snow {
+  defaultOptions = {
+    color: "white",
+    radius: [0.5, 3.0],
+    speed: [1, 3],
+    wind: [-0.5, 3.0]
+  }
+
+  constructor(canvas, count, options = {}) {
+    this.countSnowFlakes = count
+    this.options = Object.assign({}, this.defaultOptions, options)
+    this.canvas = canvas
+    this.ctx = canvas.getContext("2d")
+    this.snowFlakes = []
+    this.init()
+    this.resize()
+  }
+
+  add(item) {
+    this.snowFlakes.push(item)
+  }
+
+  update() {
+    _.forEach(this.snowFlakes, el => el.update())
+  }
+
+  resize() {
+    this.ctx.canvas.width = this.canvas.offsetWidth
+    this.ctx.canvas.height = this.canvas.offsetHeight
+    _.forEach(this.snowFlakes, el => el.resized())
+  }
+
+  draw() {
+    this.ctx.clearRect(0, 0, this.canvas.offsetWidth, this.canvas.offsetHeight)
+    _.forEach(this.snowFlakes, el => el.draw())
+  }
+
+  events() {
+    window.addEventListener("resize", this.resize.bind(this))
+  }
+
+  loop() {
+    this.draw()
+    this.update()
+    window.requestAnimationFrame(this.loop.bind(this))
+  }
+
+  init() {
+    _.times(this.countSnowFlakes, () =>
+      this.add(new SnowItem(this.canvas, this.ctx, this.options))
+    )
+    this.events()
+    this.loop()
+  }
+}
+
+const canvas = document.getElementById("snow")
+
+new Snow(canvas, 1000)
+
+    </script>
+</body>
+</html>

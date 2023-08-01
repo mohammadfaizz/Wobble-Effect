@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    body,html{
+	background: #000;
+	overflow: hidden;
+	height: 100%;
+}
+</style>
+<body>
+    
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script>
+        
+// ---------------------------------
+// ---------- Plugin Name ----------
+// ---------------------------------
+
+;(function ( $, window, document, undefined ) {
+
+var pluginName = 'letItSnow';
+var plugin;
+
+// Create the plugin constructor
+function Plugin ( element, options ) {
+
+    plugin = this;
+    this.element = element;
+    this._name = pluginName;
+    this._defaults = $.fn[pluginName].defaults;
+    this.options = $.extend( {}, this._defaults, options );
+
+    this.init();
+
+}
+
+var flake = function(_size, _speed) {
+
+    this.x = random(plugin.widthOffset, plugin.elWidth - plugin.widthOffset);
+    this.y = random(0, plugin.elHeight);
+    this.size = _size;
+    this.speed = _speed;
+    this.step = 0;
+    this.stepSize = random(1,10) / 100;
+
+    var flakeObj = null;
+
+    if(plugin.options.image){
+        flakeObj = new Image();
+        flakeObj.src = plugin.options.image;
+    } else {
+        flakeObj = document.createElement('div');
+        if(plugin.options.content) {
+            flakeObj.innerHTML = plugin.options.content;
+            setStyle(flakeObj, {'color': plugin.options.flakeColor});
+        } else {
+            setStyle(flakeObj, {'background': plugin.options.flakeColor});
+        }
+    }
+
+    flakeObj.className = 'snowfall-flakes';
+    var startPos = (plugin.options.direction == 'down') ? 0 : '100%';
+    setStyle(flakeObj, {'width' : this.size, 'height' : this.size, 'position' : plugin.options.flakePosition, 'top' : startPos, 'pointer-events' : 'none', 'left' : 0, 'will-change': 'transform', 'fontSize' : plugin.options.minSize + Math.random() * plugin.options.maxSize + 'px', 'zIndex' : plugin.options.flakeIndex});
+
+    if(plugin.element.tagName === document.body.tagName){
+        document.body.appendChild(flakeObj);
+    } else {
+        plugin.element.appendChild(flakeObj);
+    }
+
+    this.element = flakeObj;
+
+    this.update = function(){
+
+        this.y += this.speed;
+        if(this.y > plugin.elHeight - (this.size + 6)) this.reset();
+
+        if(plugin.options.direction == 'down') {
+            transform(this.element, 'translateY('+this.y+'px) translateX('+this.x+'px)');
+        } else {
+            transform(this.element, 'translateY(-'+this.y+'px) translateX('+this.x+'px)');
+        }
+
+        this.step += this.stepSize;
+        if(plugin.options.float) this.x += Math.cos(this.step);
+
+        if(this.x + this.size > plugin.elWidth - plugin.widthOffset || this.x < plugin.widthOffset){
+            this.reset();
+        } 
+
+    }
+
+    this.reset = function() {
+        this.y = 0;
+        this.x = random(plugin.widthOffset, plugin.elWidth - plugin.widthOffset);
+        this.stepSize = random(1,10) / 100;
+        this.size = random((plugin.options.minSize * 100), (plugin.options.maxSize * 100)) / 100;
+        this.element.style.width = this.size + 'px';
+        this.element.style.height = this.size + 'px';
+        this.speed = random(plugin.options.minSpeed, plugin.options.maxSpeed);
+    }
+
+}
+
+var transform = function (el, styles){
+    el.style.webkitTransform = styles;
+    el.style.MozTransform = styles;
+    el.style.msTransform = styles;
+    el.style.OTransform = styles;
+    el.style.transform = styles;
+}
+
+var random = function random(min, max){
+    return Math.round(min + Math.random()*(max-min));
+}
+
+var  setStyle = function(element, props) {
+    for (var property in props){
+        element.style[property] = props[property] + ((property == 'width' || property == 'height') ? 'px' : '');
+    }
+}
+
+// Avoid Plugin.prototype conflicts
+$.extend(Plugin.prototype, {
+
+    // Initialization logic
+    init: function () {
+        /*
+            Create additional methods below and call them via
+            "this.myFunction(arg1, arg2)", ie: "this.buildCache();".
+
+            Note, you can cccess the DOM node(s), plugin name, default
+            plugin options and custom plugin options for a each instance
+            of the plugin by using the variables "this.element",
+            "this._name", "this._defaults" and "this.options" created in
+            the "Plugin" constructor function (as shown in the buildCache
+            method below).
+        */
+
+        this.buildCache();
+        this.bindEvents();
+        this.createSnow();
+        this.animateSnow();
+    },
+
+    // Remove plugin instance completely
+    destroy: function() {
+        /*
+            The destroy method unbinds all events for the specific instance
+            of the plugin, then removes all plugin data that was stored in
+            the plugin instance using jQuery's .removeData method.
+
+            Since we store data for each instance of the plugin in its
+            instantiating element using the $.data method (as explained
+            in the plugin wrapper below), we can call methods directly on
+            the instance outside of the plugin initalization, ie:
+            $('selector').data('plugin_myPluginName').someOtherFunction();
+
+            Consequently, the destroy method can be called using:
+            $('selector').data('plugin_myPluginName').destroy();
+        */
+        this.unbindEvents();
+        this.$element.removeData();
+    },
+
+    // Cache DOM nodes for performance
+    buildCache: function () {
+        /*
+            Create variable(s) that can be accessed by other plugin
+            functions. For example, "this.$element = $(this.element);"
+            will cache a jQuery reference to the elementthat initialized
+            the plugin. Cached variables can then be used in other methods.
+        */
+        this.flakes = [];
+        this.elHeight = this.element.offsetHeight;
+        this.elWidth = this.element.offsetWidth;
+        this.widthOffset = 0;
+        this.snowTimeout = 0;
+        this.$element = $(this.element);
+
+        if(this.element.tagName.toLowerCase() === 'body'){
+            this.widthOffset = 25;
+        }
+
+    },
+
+    animateSnow: function() {
+
+        var plugin = this;
+        for(var i = 0; i < this.flakes.length; i += 1){
+            this.flakes[i].update();
+        }
+        this.snowTimeout = requestAnimationFrame(function(){plugin.animateSnow()});
+
+    },
+
+    createSnow: function() {
+
+        for(i = 0; i < this.options.flakeCount; i+=1){
+            this.flakes.push(new flake(random((this.options.minSize * 100), (this.options.maxSize * 100)) / 100, random(this.options.minSpeed, this.options.maxSpeed)));
+        }
+
+    },
+
+    // Bind events that trigger methods
+    bindEvents: function() {
+        var plugin = this;
+
+        /*
+            Bind event(s) to handlers that trigger other functions, ie:
+            "plugin.$element.on('click', function() {});". Note the use of
+            the cached variable we created in the buildCache method.
+
+            All events are namespaced, ie:
+            ".on('click'+'.'+this._name', function() {});".
+            This allows us to unbind plugin-specific events using the
+            unbindEvents method below.
+        */
+
+        // Bind the window resize event so we can get the innerHeight again
+        window.addEventListener('resize', function() {
+            plugin.elHeight = plugin.element.clientHeight;
+            plugin.elWidth = plugin.element.offsetWidth;
+        }, true);
+
+    },
+
+    // Unbind events that trigger methods
+    unbindEvents: function() {
+        /*
+            Unbind all events in our plugin's namespace that are attached
+            to "this.$element".
+        */
+        window.removeEventListener('resize');
+    },
+
+    callback: function() {
+        // Cache onComplete option
+        var onComplete = this.options.onComplete;
+
+        if ( typeof onComplete === 'function' ) {
+            /*
+                Use the "call" method so that inside of the onComplete
+                callback function the "this" keyword refers to the
+                specific DOM node that called the plugin.
+
+                More: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+            */
+            onComplete.call(this.element);
+        }
+    }
+
+});
+
+/*
+    Create a lightweight plugin wrapper around the "Plugin" constructor,
+    preventing against multiple instantiations.
+
+    More: https://learn.jquery.com/plugins/basic-plugin-creation/
+*/
+$.fn[pluginName] = function ( options ) {
+    this.each(function() {
+        if ( !$.data( this, "plugin_" + pluginName ) ) {
+            /*
+                Use "$.data" to save each instance of the plugin in case
+                the user wants to modify it. Using "$.data" in this way
+                ensures the data is removed when the DOM element(s) are
+                removed via jQuery methods, as well as when the userleaves
+                the page. It's a smart way to prevent memory leaks.
+
+                More: https://api.jquery.com/jquery.data/
+            */
+            $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
+        }
+    });
+    /*
+        "return this;" returns the original jQuery object. This allows
+        additional jQuery methods to be chained.
+    */
+    return this;
+};
+
+/*
+    Attach the default plugin options directly to the plugin object. This
+    allows users to override default plugin options globally, instead of
+    passing the same option(s) every time the plugin is initialized.
+
+    For example, the user could set the "property" value once for all
+    instances of the plugin with
+    "$.fn.pluginName.defaults.property = 'myValue';". Then, every time
+    plugin is initialized, "property" will be set to "myValue".
+
+    More: https://learn.jquery.com/plugins/advanced-plugin-concepts/
+*/
+$.fn[pluginName].defaults = {
+    flakeCount : 35,
+    flakeColor : '#ffffff',
+    flakeIndex: 999999,
+    flakePosition: 'fixed',
+    float: false,
+    minSize : 1,
+    maxSize : 5,
+    minSpeed : 1,
+    maxSpeed : 5,
+    round : false,
+    image : false,
+    content: '',
+    direction: 'down',
+    onComplete: null
+};
+
+})( jQuery, window, document );
+
+$(function() {
+
+$('body').letItSnow();
+
+});
+    </script>
+</body>
+</html>
