@@ -287,7 +287,7 @@ body{
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url(//a.thumbs.redditmedia.com/8cb8IsuH62DCevyPep36OLbzJUMdqgnqjJZ9I7HcGP4.png),url(//b.thumbs.redditmedia.com/Z5QSOcHdGDSX78ss8u42azJq8iK9ZJsxktEbV2r3BDQ.png),url(//b.thumbs.redditmedia.com/e32lYqPQGe79n9v38Z9mkXMErBGs7tyPk29P0m0WDSA.png),url(./7109.jpg);
+    background-image: url(//a.thumbs.redditmedia.com/8cb8IsuH62DCevyPep36OLbzJUMdqgnqjJZ9I7HcGP4.png),url(//b.thumbs.redditmedia.com/Z5QSOcHdGDSX78ss8u42azJq8iK9ZJsxktEbV2r3BDQ.png),url(//b.thumbs.redditmedia.com/e32lYqPQGe79n9v38Z9mkXMErBGs7tyPk29P0m0WDSA.png);
   background-repeat: repeat;
     /* -webkit-animation: snow 20s linear infinite; */
     animation: snow 20s linear infinite;
@@ -313,33 +313,23 @@ body{
 <h1 style="font-size: 90px; margin: 0;"><span class="blast" style=" color: #ffd700;">M</span><span class="blast" style=" color: #ffd700;">o</span><span class="blast" style=" color: #ffd700;">h</span><span class="blast" style=" color: #ffd700;">d</span> &nbsp;<span class="blast" style=" color: #ffd700;">F</span><span class="blast" style=" color: #ffd700;">a</span><span class="blast" style=" color: #ffd700;">i</span><span class="blast" style=" color: #ffd700;">z</span></h1> -->
 
 
-<div class="d-flex flex-column justify-content-center align-items-center w-100 h-100">
-    <h1 class="text-white d-inline mb-5">Hey it's me,</h1>
-    <div class="cat mt-5">
-        <div class="ear ear--left"></div>
-        <div class="ear ear--right"></div>
-        <div class="face">
-            <div class="eye eye--left">
-                <div class="eye-pupil"></div>
-            </div>
-            <div class="eye eye--right">
-                <div class="eye-pupil"></div>
-            </div>
-            <div class="muzzle"></div>
-        </div>
-    </div>
-    <h1 class="text-white fw-bold big_text_shadow" style="font-size:60px; color: #fff !important;"><span class="blast">M</span><span class="blast">o</span><span class="blast">h</span><span class="blast">d</span> <span class="blast">F</span><span class="blast">a</span><span class="blast">i</span><span class="blast">z</span></h1>
-    <h1 class="text-white fw-bold blast big_text_shadow" style="font-size:40px; color: #fff !important;">Web Developer</h1>
+<div class="position-absolute bg-white top-0 w-100">
+  <div class="container">
+    <marquee direction="left">
+       A PROGRAMMER WITH A NOOB VISION
+    </marquee>
+  </div>
 </div>
 
+<div id="main_container" class="d-flex flex-column justify-content-center align-items-center w-100 h-100"></div>
 
-<div class="position-absolute bg-white bottom-0 w-100" style="margin-bottom: 0px;">
+<div class="position-absolute bg-white bottom-0 w-100">
     <lord-icon id="home" src="https://cdn.lordicon.com/gmzxduhd.json"  class="me-3 me-sm-4" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="100" style="width:50px;height:50px"></lord-icon>
-    <lord-icon src="https://cdn.lordicon.com/eszyyflr.json" class="me-3 me-sm-4" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="100" style="width:50px;height:50px"></lord-icon>
-    <lord-icon src="https://cdn.lordicon.com/qhgmphtg.json" class="me-3 me-sm-4" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="60" style="width:50px;height:50px"></lord-icon>
+    <lord-icon id="about" src="https://cdn.lordicon.com/eszyyflr.json" class="me-3 me-sm-4" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="100" style="width:50px;height:50px"></lord-icon>
+    <lord-icon id="skills" src="https://cdn.lordicon.com/qhgmphtg.json" class="me-3 me-sm-4" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="60" style="width:50px;height:50px"></lord-icon>
     <!-- <lord-icon src="https://cdn.lordicon.com/sbiheqdr.json" trigger="hover" colors="primary:#01acdf,secondary:#e0edf5" stroke="80" style="width:50px;height:50px"></lord-icon> -->
-    <lord-icon src="https://cdn.lordicon.com/nocovwne.json" class="me-3 me-sm-4" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="100" style="width:50px;height:50px"></lord-icon>
-    <lord-icon src="https://cdn.lordicon.com/zpxybbhl.json" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="100" style="width:50px;height:50px"></lord-icon>
+    <lord-icon id="work" src="https://cdn.lordicon.com/nocovwne.json" class="me-3 me-sm-4" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="100" style="width:50px;height:50px"></lord-icon>
+    <lord-icon id="contact" src="https://cdn.lordicon.com/zpxybbhl.json" trigger="hover" colors="primary:#121331,secondary:#b4b4b4" stroke="100" style="width:50px;height:50px"></lord-icon>
 </div> 
 
 <script src="./js/jquery.js"></script>
@@ -347,64 +337,70 @@ body{
 <script src="./js/bootstrap.min.js"></script>
 <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
 <script>
-    $(".blast").on("mouseenter",function(){
-        $(this).addClass("animated rubberBand text_shadow");
-        setTimeout(() => {
-            $(this).removeClass("animated rubberBand");
-        }, 1000);
-    });
 
-    $(".blast").on("mouseleave",function(){
-        $(this).removeClass("text_shadow");
-    });
+var home = `
+      <h1 class="text-white d-inline mb-5">Hey it's me,</h1>
+      <div class="cat mt-5">
+          <div class="ear ear--left"></div>
+          <div class="ear ear--right"></div>
+          <div class="face">
+              <div class="eye eye--left">
+                  <div class="eye-pupil"></div>
+              </div>
+              <div class="eye eye--right">
+                  <div class="eye-pupil"></div>
+              </div>
+              <div class="muzzle"></div>
+          </div>
+      </div>
+      <h1 class="text-white fw-bold big_text_shadow opacity-1" style="font-size:60px; color: #fff !important;"><span class="blast">M</span><span class="blast">o</span><span class="blast">h</span><span class="blast">d</span> <span class="blast">F</span><span class="blast">a</span><span class="blast">i</span><span class="blast">z</span></h1>
+      <h2 class="text-white fw-bold blast big_text_shadow" style="color: #fff !important;">Web Developer</h2>
+  
+`;
 
-
-    $("#home").on("mouseenter",function(){
-        setTimeout(() => {
-            console.log("hh");
-            $(this).html("<p>Home</p>");
-        }, 1000);
-    })
-    
-    (function() {
-  let speedSlider = document.querySelector("#range-slider");
-  let speedValue = speedSlider.value;
-  let snow = document.querySelectorAll("#snowbanner .snow");
-  let snowSwitch = true;
-
-  speedSlider.addEventListener("input", function() {
-    speedValue = speedSlider.value;
-    setSeconds();
-  });
-
-  function setSeconds() {
-    let seconds = (100 - speedValue) * 0.2;
-    if (seconds < 0.5) {
-      seconds = 0.5;
-    }
-
-    seconds >= 20 ? (snowSwitch = false) : (snowSwitch = true);
-
-    snow.forEach(element => {
-      element.style.WebkitAnimationDuration = `${seconds}s`;
-      element.style.animationDuration = `${seconds}s`;
-
-      if (snowSwitch) {
-        element.style.WebkitAnimationIterationCount = "infinite";
-        element.style.animationIterationCount = "infinite";
-        element.style.opacity = "1";
-      } else {
-        element.style.WebkitAnimationIterationCount = "1";
-        element.style.animationIterationCount = "1";
-        element.style.opacity = "0";
-      }
-    });
-  }
-
-  setSeconds();
-})();
+$(document).ready(function(){
+  $("#main_container").html(home);
+});
 
 
-    </script>
+$(".blast").on("mouseenter",function(){
+    $(this).addClass("animated rubberBand text_shadow");
+    setTimeout(() => {
+        $(this).removeClass("animated rubberBand");
+    }, 1000);
+});
+
+$(".blast").on("mouseleave",function(){
+    $(this).removeClass("text_shadow");
+});
+
+
+// $("#home").on("mouseenter",function(){
+//     setTimeout(() => {
+//         console.log($("#home").html("home"));
+//     }, 1000);
+// });
+
+$(document).on("click","#about",function(){
+  $("#main_container").html("<h1 class='text-white'>ABOUT ME?</h1>")
+});
+
+$(document).on("click","#skills",function(){
+  $("#main_container").html("<h1 class='text-white'>MY SKILLS?</h1>")
+});
+
+$(document).on("click","#work",function(){
+  $("#main_container").html("<h1 class='text-white'>MY WORK??</h1>")
+});
+
+$(document).on("click","#contact",function(){
+  $("#main_container").html("<h1 class='text-white'>MY CONTACT?</h1>")
+});
+
+$(document).on("click","#home",function(){
+  $("#main_container").html(home)
+});
+
+</script>
 </body>
 </html>
